@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html5 lec2 task4</title>
+</head>
+<body>
+    <!-- 
+        when write width and height in the style tage error in draw??
+           <canvas id="mycanvas"  width=600 height=300 style="width:500px;height:300px;border:3px solid blue;"></canvas>
+-->
+    <canvas id="mycanvas" style="border:3px solid blue;" width="600" height="300"></canvas>
+        <br>
+        <button onclick="draw()">draw</button>
+        
+        <button onclick="clearcanv()">clear</button>
+
+    <script>
+        
+        //using javascript
+        var canvas=document.getElementById("mycanvas");
+        var ctx=canvas.getContext("2d");
+        w=canvas.width;
+        h=canvas.height;
+       /*  var w = canvas.style.width.toString() ;
+        w=w.slice(0,w.length-2);
+        var h = canvas.style.height.toString() ;
+        h=h.slice(0,h.length-2);  */       //fill color
+        /////////////////////////////////////////
+        
+        //ctx.rect(x,y,width, height);
+      /*   ctx.rect(190, 50, 200, 100);
+        ctx.lineWidth = 7;
+        ctx.strokeStyle = 'yellow';
+        ctx.stroke(); */
+///////////////////////////////////////
+
+            ///////////////////////////////////////
+
+        var x=0,y=0,curX=0,curY=0;
+        f=()=>{};
+        draw=()=>{
+
+            canvas.removeEventListener('mousemove',f,false);
+
+        canvas.addEventListener("mousemove",f=()=>{
+            if(x==0||y==0){
+                x=event.offsetX;y=event.offsetY;
+                
+            }else{
+                x=curX;y=curY;
+            }
+        
+        curX=event.offsetX;curY=event.offsetY;
+        console.log("x="+x+"---y="+y+" <------->  curX="+curX+"------curY="+curY);
+        //ctx.fillRect(x, y, Math.abs(x-curX) ,Math.abs(y-curY) );
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(Math.abs(curX), Math.abs(curY));
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.closePath();
+        },false);
+           
+         
+  }
+
+        
+        clearcanv=()=>{
+          canvas.removeEventListener('mousemove',f,false);
+            //or
+           //canvas.removeEventListener("mouseover", f, { passive: true });//passiveif propagation bubiling and capturing is false or the defualt value
+           canvas.addEventListener("mousemove",f=()=>{
+            if(x==0||y==0){
+                x=event.offsetX;y=event.offsetY;
+                
+            }else{
+                x=curX;y=curY;
+            }
+        
+        curX=event.offsetX;curY=event.offsetY;
+        console.log("x="+x+"---y="+y+" <------->  curX="+curX+"------curY="+curY);
+        //ctx.clearRect(x, y, Math.abs(x-curX) ,Math.abs(y-curY) );
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(Math.abs(curX), Math.abs(curY));
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 14;
+        ctx.stroke();
+        ctx.closePath();
+        },false);
+           
+            console.log("clear"+w+"  "+y);
+        } 
+
+           /*  if (event.which !== 1) {
+    event.preventDefault();
+            } */
+    </script>
+
+</body></html>
